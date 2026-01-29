@@ -1,0 +1,17 @@
+# Databricks App Configuration for Azure Databricks
+# Documentation: https://learn.microsoft.com/en-us/azure/databricks/dev-tools/databricks-apps/
+
+command:
+  - "streamlit"
+  - "run"
+  - "main.py"
+  - "--server.port"
+  - "8000"
+  - "--server.address"
+  - "0.0.0.0"
+
+env:
+  - name: STREAMLIT_SERVER_HEADLESS
+    value: "true"
+  - name: STREAMLIT_BROWSER_GATHER_USAGE_STATS
+    value: "false"
