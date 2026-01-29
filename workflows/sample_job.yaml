@@ -1,0 +1,44 @@
+# Sample Databricks Job Definition
+# Use this template to define Databricks workflows
+
+name: sample_etl_job
+description: Sample ETL job for demonstration
+
+# Job cluster configuration
+job_clusters:
+  - job_cluster_key: etl_cluster
+    new_cluster:
+      spark_version: "13.3.x-scala2.12"
+      node_type_id: "Standard_DS3_v2"
+      num_workers: 2
+      spark_conf:
+        spark.databricks.delta.preview.enabled: "true"
+      spark_env_vars:
+        ENV: "dev"
+
+# Task definitions
+tasks:
+  - task_key: run_etl
+    job_cluster_key: etl_cluster
+    notebook_task:
+      notebook_path: /Repos/your-repo/notebooks/etl/sample_etl
+      base_parameters:
+        input_path: "/mnt/dev/input"
+        output_path: "/mnt/dev/output"
+    timeout_seconds: 3600
+
+# Schedule (optional)
+schedule:
+  quartz_cron_expression: "0 0 8 * * ?"  # Daily at 8 AM
+  timezone_id: "UTC"
+  pause_status: "PAUSED"
+
+# Email notifications (optional)
+email_notifications:
+  on_failure:
+    - your-email@example.com
+
+# Tags
+tags:
+  environment: dev
+  team: data-engineering

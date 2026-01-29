@@ -1,0 +1,5 @@
+# Streamlit Databricks App dependencies
+streamlit>=1.29.0
+pandas>=2.0.0
+databricks-sdk>=0.12.0
+databricks-sql-connector>=3.0.0
